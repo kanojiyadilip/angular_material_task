@@ -1,0 +1,78 @@
+<!-- <h1 mat-dialog-title>{{eventName}}</h1> -->
+<form *ngIf="eventName == 'edit' || eventName == 'add'" [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+<div mat-dialog-content>
+  <div fxLayout="row wrap" fxLayoutAlign="center start"> 
+    <div class="sub-section-1 marginten">
+      <mat-form-field appearance="outline">
+        <mat-label>Full Name</mat-label>
+        <input matInput placeholder="" formControlName="name">
+        <mat-error *ngIf="!formGroup.controls['name'].valid && formGroup.controls['name'].touched">name is invalid</mat-error>
+      </mat-form-field>
+    </div>  
+    <div class="sub-section-1 marginten">
+      <mat-form-field appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <input matInput placeholder="" formControlName="email">
+        <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">email is invalid</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutAlign="center start"> 
+    <div class="sub-section-1 marginten">
+      <mat-radio-group color="primary" aria-label="Select an option" formControlName="gender">
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="sub-section-1 marginten">
+      <mat-form-field appearance="outline">
+        <mat-label>Date of birth</mat-label>
+        <input matInput [matDatepicker]="dp3" formControlName="dob" >
+        <mat-error *ngIf="!formGroup.controls['dob'].valid && formGroup.controls['dob'].touched">dob is invalid</mat-error>
+        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+      </mat-form-field>    
+    </div>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="start"> 
+    <div class="sub-section-2" style="margin: 10px; width: 100%;">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Address</mat-label>
+      <textarea matInput placeholder="" formControlName="address"></textarea>
+      <mat-error *ngIf="!formGroup.controls['address'].valid && formGroup.controls['address'].touched">address is invalid</mat-error>
+    </mat-form-field>    
+    </div>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutAlign="center start">
+    <button class="btn" mat-button>Submit</button>
+  </div>
+
+</div>
+</form>
+
+
+<div mat-dialog-content *ngIf="eventName == 'delete'">
+  <h2>Are you sure delete it ?</h2>
+
+  <div fxLayout="row wrap" fxLayoutAlign="center start"> 
+    <div class="sub-section-1 marginten">
+      <button class="btn" (click)="onNoClick('y')" mat-button>Yes</button>
+    </div>
+    <div class="sub-section-1 marginten">
+      <button class="btn" (click)="onNoClick('c')" mat-button>Cancel</button>
+    </div>
+  </div>  
+</div>
+
+<div mat-dialog-content *ngIf="eventName == 'msg'">
+  <h2>{{msg}}</h2>
+
+  <div fxLayout="row wrap" fxLayoutAlign="center start"> 
+    <div class="sub-section-1 marginten">
+      <button class="btn" (click)="onNoClick('c')" mat-button>OK</button>
+    </div>
+  </div>  
+</div>
